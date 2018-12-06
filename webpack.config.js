@@ -1,41 +1,78 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HotModuleReplacementPlugin = require('webpack').HotModuleReplacementPlugin;
+const WebpackNotifierPlugin = require('webpack-notifier');
 
 module.exports = {
+    mode: 'development',
     context: path.resolve(__dirname, './src'),
     entry: {
         app: './app',
     },
     output: {
-        filename: '[name].bundle.js',
+        filename: '[name].[hash].js',
         path: path.resolve(__dirname, './dist/assets'),
-        publicPath: '/assets',                          // New
-    },
-    devServer: {
-        contentBase: path.resolve(__dirname, './src'),  // New
     },
 
-    devtool: "source-map",
+    devServer: {
+        port: 3330,
+        host: 'localhost',
+        hotOnly: true,
+        historyApiFallback: false,
+    },
+
+    devtool: "inline-source-map",
 
     resolve: {
-        extensions: [".ts", ".js", ".json"]
+        extensions: [".tsx", ".ts", ".json", ".js"],
+        modules: [
+            path.resolve(__dirname, './src'),
+            'node_modules'
+        ]
     },
 
     module: {
         rules: [
-            // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
             {
-                test: /\.ts$/,
-                exclude: [/node_modules/],
+                test: /\.tsx?$/,
+                exclude: /node_modules/,
                 loader: "awesome-typescript-loader"
             },
-
-            // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
             {
-                enforce: "pre",
-                test: /\.js$/,
-                exclude: [/node_modules/],
-                loader: "source-map-loader"
+                test: /\.(css|scss)$/,
+                use: [{
+                    loader: "style-loader"
+                }, {
+                    loader: "css-loader"
+                }, {
+                    loader: "sass-loader"
+                }]
+            },
+            {
+                test: /\.(jpg|png|svg)$/,
+                use: {
+                    loader: "url-loader",
+                    options: {
+                        limit: 25000,
+                    },
+                },
             }
         ]
-    }
-}
+    },
+
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: './index.html.ejs',
+            inject: 'body',
+        }),
+        new HotModuleReplacementPlugin(),
+        new CopyWebpackPlugin([
+            {
+                from: './assets',
+                to: '../'
+            }
+        ]),
+        new WebpackNotifierPlugin(),
+    ],
+};
