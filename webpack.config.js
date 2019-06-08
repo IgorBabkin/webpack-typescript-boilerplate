@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HotModuleReplacementPlugin = require('webpack').HotModuleReplacementPlugin;
+const ProgressPlugin = require('webpack').ProgressPlugin;
 const WebpackNotifierPlugin = require('webpack-notifier');
 
 module.exports = {
@@ -74,5 +75,6 @@ module.exports = {
             }
         ]),
         new WebpackNotifierPlugin(),
+        new ProgressPlugin()
     ],
 };
