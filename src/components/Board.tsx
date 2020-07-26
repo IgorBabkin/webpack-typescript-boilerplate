@@ -4,12 +4,13 @@ import cs from 'classnames';
 import {repeat} from '../utils';
 import {FigureColor, FigureType} from './domain';
 import {Dictionary} from './types';
-import {Figure} from './Figure';
+import {Figure} from './figure/Figure';
+import {Tile} from './tile/Tile';
 
 const LETTER_A = 65;
 const BOARD_SIZE = 8;
-const isTileOdd = (index: number) => Math.floor(index / BOARD_SIZE) % 2;
-const numberToPosition = (i: number) => [
+const isTileOdd = (index: number) => !!(Math.floor(index / BOARD_SIZE) % 2);
+export const numberToPosition = (i: number) => [
     String.fromCharCode(LETTER_A + i % BOARD_SIZE),
     BOARD_SIZE - Math.floor(i / BOARD_SIZE),
 ];
@@ -39,14 +40,11 @@ export const Board: FunctionComponent<BoardProps> = ({figures}) => {
             </div>
             <div className='board-grid board__grid'>
                 {POSITIONS.map((pos, i) => (
-                    <div
-                        key={pos}
-                        className={cs('board-tile', {'board-tile--odd': isTileOdd(i)})}
-                    >
+                    <Tile key={pos} pos={pos} black={isTileOdd(i)}>
                         {figures[pos] && (
-                            <Figure {...figures[pos]} />
+                            <Figure {...figures[pos]} pos={pos} />
                         )}
-                    </div>
+                    </Tile>
                 ))}
             </div>
         </div>

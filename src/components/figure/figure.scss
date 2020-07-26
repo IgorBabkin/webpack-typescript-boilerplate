@@ -1,0 +1,7 @@
+.board-figure {
+  background-color: transparent;
+  filter: brightness(0.8);
+  &--dragging {
+    filter: brightness(1);
+  }
+}
