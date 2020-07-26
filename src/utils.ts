@@ -1,0 +1,1 @@
+export const repeat = (n: number) => Object.keys(Array.from(new Array(n)));

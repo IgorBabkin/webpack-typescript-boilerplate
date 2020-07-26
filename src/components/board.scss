@@ -1,6 +1,6 @@
 .board {
   display: flex;
-  background-color: green;
+  background-color: #333;
   width: 700px;
   height: 700px;
   box-sizing: border-box;
@@ -37,6 +37,7 @@
 
 .board-numbers {
   display: flex;
+  color: #ddd;
   flex-direction: column-reverse;
   justify-content: space-around;
   align-items: center;
@@ -46,30 +47,31 @@
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(8, 1fr);
-  grid-column-gap: 10px;
-  grid-row-gap: 10px;
+  grid-column-gap: 0;
+  grid-row-gap: 0;
   justify-content: center;
   cursor: default;
 }
 
 .board-tile {
   &:nth-child(2n):not(.board-tile--odd) {
-    background-color: red;
+    background-color: #999;
   }
   &--odd {
     &:nth-child(2n + 1) {
-      background-color: red;
+      background-color: #999;
     }
   }
-  background-color: blue;
-  color: white;
+  background-color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
   user-select: none;
+  font-size: 5rem;
 }
 
 .board-letters {
+  color: #ddd;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
