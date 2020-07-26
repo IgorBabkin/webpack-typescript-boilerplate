@@ -4,11 +4,12 @@ import {useDrag} from 'react-dnd';
 import cs from 'classnames';
 import './figure.scss';
 import {CHESS_ICONS} from './icons';
+import {FigureDragObject, FigureDropResult} from '../figureDND';
 
 interface FigureProps {
     type: FigureType;
     color: FigureColor;
-    pos: string;
+    onDrop: (target: string) => void;
 }
 
 function getChessIcon(type: FigureType, color: FigureColor): string {
@@ -20,12 +21,19 @@ function getChessIcon(type: FigureType, color: FigureColor): string {
     return icon;
 }
 
-export const Figure: FunctionComponent<FigureProps> = ({type, color, pos}) => {
-    const [{isDragging}, drag] = useDrag({
-        item: {type: 'any', pos},
+export type FigureCollectedProps = {
+    isDragging: boolean;
+}
+
+export const Figure: FunctionComponent<FigureProps> = ({type, color, onDrop}) => {
+    const [{isDragging}, drag] = useDrag<FigureDragObject, FigureDropResult, FigureCollectedProps>({
+        item: {type: 'any'},
         collect: (monitor) => ({
             isDragging: !!monitor.isDragging(),
         }),
+        end: (dragObject, monitor) => {
+            onDrop(monitor.getDropResult().position);
+        }
     });
     return (
         <div

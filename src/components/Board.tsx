@@ -1,10 +1,13 @@
-import React, {FunctionComponent} from 'react';
+import React, {FunctionComponent, useMemo} from 'react';
 import './board.scss';
 import {repeat} from '../utils';
 import {FigureColor, FigureType} from './domain';
 import {Dictionary} from './types';
 import {Figure} from './figure/Figure';
 import {Tile} from './tile/Tile';
+import {shallowEqual, useDispatch, useSelector, useStore} from 'react-redux';
+import {figuresSlice} from '../slices/figuresSlice';
+import {AppState} from './store';
 
 const LETTER_A = 65;
 const BOARD_SIZE = 8;
@@ -21,10 +24,17 @@ interface FigureItem {
 }
 
 interface BoardProps {
-    figures: Dictionary<FigureItem>;
+    // figures: Dictionary<FigureItem>;
 }
 
-export const Board: FunctionComponent<BoardProps> = ({figures}) => {
+export const Board: FunctionComponent<BoardProps> = () => {
+    const dispatch = useDispatch();
+    const figures = useSelector<AppState, Dictionary<FigureItem>>(state => {
+        return state.figures.reduce((acc, item) => {
+            acc[item.position] = item;
+            return acc;
+        }, {})
+    }, shallowEqual);
     return (
         <div className='board'>
             <div className='board-letters board__letters'>
@@ -38,10 +48,16 @@ export const Board: FunctionComponent<BoardProps> = ({figures}) => {
                 ))}
             </div>
             <div className='board-grid board__grid'>
-                {POSITIONS.map((pos, i) => (
-                    <Tile key={pos} pos={pos} black={isTileOdd(i)}>
-                        {figures[pos] && (
-                            <Figure {...figures[pos]} pos={pos} />
+                {POSITIONS.map((position, i) => (
+                    <Tile key={position} position={position} black={isTileOdd(i)}>
+                        {figures[position] && (
+                            <Figure
+                                {...figures[position]}
+                                onDrop={(targetPosition) => dispatch(figuresSlice.actions.move({
+                                    from: position,
+                                    to: targetPosition,
+                                }))}
+                            />
                         )}
                     </Tile>
                 ))}
