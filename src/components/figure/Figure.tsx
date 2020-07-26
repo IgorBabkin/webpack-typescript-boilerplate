@@ -3,6 +3,7 @@ import {FigureColor, FigureType} from '../domain';
 import {useDrag} from 'react-dnd';
 import cs from 'classnames';
 import './figure.scss';
+import {CHESS_ICONS} from './icons';
 
 interface FigureProps {
     type: FigureType;
@@ -10,27 +11,8 @@ interface FigureProps {
     pos: string;
 }
 
-const icons = {
-    'white': {
-        'king': '&#x2654;',
-        'queen': '&#x2655;',
-        'rook': '&#x2656;',
-        'bishop': '&#x2657;',
-        'knight': '&#x2658;',
-        'pawn': '&#x2659;',
-    },
-    'black': {
-        'king': '&#x265A;',
-        'queen': '&#x265B;',
-        'rook': '&#x265C;',
-        'bishop': '&#x265D;',
-        'knight': '&#x265E;',
-        'pawn': '&#x265F;',
-    },
-}
-
 function getChessIcon(type: FigureType, color: FigureColor): string {
-    const icon = icons[color][type];
+    const icon = CHESS_ICONS[color][type];
     if (!icon) {
         throw new Error(`Wrong arguments: ${type} ${color}`);
     }

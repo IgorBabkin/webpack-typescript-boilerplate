@@ -1,6 +1,5 @@
 import React, {FunctionComponent} from 'react';
 import './board.scss';
-import cs from 'classnames';
 import {repeat} from '../utils';
 import {FigureColor, FigureType} from './domain';
 import {Dictionary} from './types';
