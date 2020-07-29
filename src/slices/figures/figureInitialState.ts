@@ -1,6 +1,6 @@
-import {FigureState} from '../components/store';
+import {FigureItem} from '../../components/domain';
 
-export const figureInitialState: FigureState = [
+export const figureInitialState: FigureItem[] = [
     {type: 'rook', color: 'white', position: 'A1'},
     {type: 'knight', color: 'white', position: 'B1'},
     {type: 'bishop', color: 'white', position: 'C1'},

@@ -1,13 +1,13 @@
-import React, {FunctionComponent, useMemo} from 'react';
+import React, {FunctionComponent} from 'react';
 import './board.scss';
 import {repeat} from '../utils';
 import {FigureColor, FigureType} from './domain';
 import {Dictionary} from './types';
 import {Figure} from './figure/Figure';
 import {Tile} from './tile/Tile';
-import {shallowEqual, useDispatch, useSelector, useStore} from 'react-redux';
-import {figuresSlice} from '../slices/figuresSlice';
-import {AppState} from './store';
+import {shallowEqual, useDispatch, useSelector} from 'react-redux';
+import {RootState} from '../slices/rootReducer';
+import {newMove} from '../epics/connection/connectionActions';
 
 const LETTER_A = 65;
 const BOARD_SIZE = 8;
@@ -29,8 +29,8 @@ interface BoardProps {
 
 export const Board: FunctionComponent<BoardProps> = () => {
     const dispatch = useDispatch();
-    const figures = useSelector<AppState, Dictionary<FigureItem>>(state => {
-        return state.figures.reduce((acc, item) => {
+    const figures = useSelector<RootState, Dictionary<FigureItem>>(state => {
+        return state.figures.items.reduce((acc, item) => {
             acc[item.position] = item;
             return acc;
         }, {})
@@ -53,9 +53,11 @@ export const Board: FunctionComponent<BoardProps> = () => {
                         {figures[position] && (
                             <Figure
                                 {...figures[position]}
-                                onDrop={(targetPosition) => dispatch(figuresSlice.actions.move({
+                                onDrop={(targetPosition) => dispatch(newMove({
                                     from: position,
                                     to: targetPosition,
+                                    color: 'white',
+                                    time: Date.now(),
                                 }))}
                             />
                         )}
