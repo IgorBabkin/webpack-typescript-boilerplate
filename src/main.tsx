@@ -3,10 +3,10 @@ import {render} from 'react-dom';
 import {DndProvider} from 'react-dnd';
 import {Provider} from 'react-redux';
 import {HTML5Backend} from 'react-dnd-html5-backend';
-import {start} from './epics/connection/connectionActions';
 import {App} from './components/app';
-import {createStore} from './store/store';
+import {createStore} from './store/createStore';
 import {Connection} from './services/Connection';
+import {start} from './epics/epicActions';
 
 const store = createStore({
     connection: new Connection(),

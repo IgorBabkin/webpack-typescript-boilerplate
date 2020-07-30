@@ -1,4 +1,4 @@
-import {FigureColor, FigureItem} from './domain';
+import {FigureColor, FigureItem} from '../domain/domain';
 import {Epic} from 'redux-observable';
 import {AnyAction} from '@reduxjs/toolkit';
 import {IConnection} from '../services/IConnection';

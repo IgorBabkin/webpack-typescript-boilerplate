@@ -4,9 +4,10 @@ import {Board} from './board/Board';
 import './app.scss';
 import {useDispatch} from 'react-redux';
 import {updatePlayer, usePlayerColorSelector} from 'slices/player/playerSlice';
-import {newMove} from '../epics/connection/connectionActions';
 import {ColorSelector} from './colorSelector/ColorSelector';
 import {useFiguresSelector} from '../slices/figures/figuresSlice';
+import {newMove, resetGame} from '../epics/epicActions';
+import cn from 'classnames';
 
 export const App: FunctionComponent = () => {
     const color = usePlayerColorSelector();
@@ -14,11 +15,13 @@ export const App: FunctionComponent = () => {
     const figures = useFiguresSelector();
     return (
         <div className="app">
-            <div className="app__color-selector">
+            <div className="app__controls">
                 <ColorSelector
+                    className={cn('app__control')}
                     value={color}
                     onChange={(value) => dispatch(updatePlayer({color: value}))}
                 />
+                <button className='app__control' onClick={() => dispatch(resetGame())}>Reset</button>
             </div>
             <Board
                 color={color}

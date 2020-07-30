@@ -1,4 +1,4 @@
-import {FigureItem} from '../../components/domain';
+import {FigureItem} from '../../domain/domain';
 
 export const figureInitialState: FigureItem[] = [
     {type: 'rook', color: 'white', position: 'A1'},

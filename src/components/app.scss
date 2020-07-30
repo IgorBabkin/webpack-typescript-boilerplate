@@ -6,7 +6,15 @@
   align-items: center;
   flex-direction: column;
 
-  &__color-selector {
+  &__controls {
     margin-bottom: 1rem;
+  }
+
+  &__control {
+    margin-left: 1rem;
+    font-size: 2rem;
+  }
+
+  &__color-selector {
   }
 }

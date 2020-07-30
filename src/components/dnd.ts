@@ -1,5 +1,12 @@
 import {useDrag, useDrop} from 'react-dnd';
-import {FigureDragObject, FigureDropResult} from './figureDND';
+
+export type FigureDragObject = {
+    type: 'any',
+}
+
+export type FigureDropResult = {
+    position: string;
+}
 
 export const useItemDrag = (onDrop: (target: string) => void) => {
     return useDrag<FigureDragObject, FigureDropResult, { isDragging: boolean; }>({

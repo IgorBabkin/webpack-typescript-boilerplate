@@ -1,8 +1,8 @@
 import {createSlice, SliceCaseReducers} from '@reduxjs/toolkit';
-import {PlayerState} from '../../components/store';
+import {PlayerState} from '../../store/storeTypes';
 import {shallowEqual, useSelector} from 'react-redux';
 import {RootState} from '../rootReducer';
-import {FigureColor} from '../../components/domain';
+import {FigureColor} from '../../domain/domain';
 
 export const playerSlice = createSlice<PlayerState, SliceCaseReducers<PlayerState>>({
     name: 'player',

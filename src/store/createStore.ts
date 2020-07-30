@@ -1,8 +1,8 @@
-import {combineEpics, createEpicMiddleware} from 'redux-observable';
+import {createEpicMiddleware} from 'redux-observable';
 import {AnyAction, configureStore, getDefaultMiddleware} from '@reduxjs/toolkit';
 import {rootReducer, RootState} from '../slices/rootReducer';
-import {Dependencies} from '../components/store';
-import {connectionEpic, makeMoveEpic, movesEpic} from '../epics/connection/connectionEpic';
+import {Dependencies} from './storeTypes';
+import {rootEpic} from '../epics/rootEpic';
 
 export function createStore(dependencies: Dependencies) {
     const epicMiddleware = createEpicMiddleware<AnyAction, AnyAction, RootState, Dependencies>({
@@ -15,11 +15,7 @@ export function createStore(dependencies: Dependencies) {
         middleware: [...getDefaultMiddleware(), epicMiddleware],
     });
 
-    epicMiddleware.run(combineEpics(
-        connectionEpic,
-        movesEpic,
-        makeMoveEpic,
-    ));
+    epicMiddleware.run(rootEpic);
 
     return store;
 }

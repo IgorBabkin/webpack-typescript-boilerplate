@@ -1,11 +1,10 @@
 import React, {FunctionComponent} from 'react';
 import './board.scss';
 import cn from 'classnames';
-import {FigureColor, FigureType} from '../domain';
-import {GameMove} from '../../epics/connection/connectionActions';
+import {FigureColor, FigureType, GameMove} from '../../domain/domain';
 import {Tile} from '../tile/Tile';
 import {Figure} from '../figure/Figure';
-import {Dictionary} from '../types';
+import {Dictionary} from '../../utils/types';
 import {isTileOdd, LETTERS, NUMBERS, POSITIONS} from './boardHelpers';
 
 interface BoardProps {

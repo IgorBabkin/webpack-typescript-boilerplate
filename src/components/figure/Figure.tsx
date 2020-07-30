@@ -1,5 +1,5 @@
 import React, {FunctionComponent} from 'react';
-import {FigureColor, FigureType} from '../domain';
+import {FigureColor, FigureType} from '../../domain/domain';
 import cn from 'classnames';
 import './figure.scss';
 import {getChessIcon} from './icons';

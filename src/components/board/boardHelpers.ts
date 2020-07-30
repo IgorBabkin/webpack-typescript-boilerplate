@@ -1,4 +1,4 @@
-import {repeat} from '../../utils';
+import {repeat} from '../../utils/utils';
 
 const LETTER_A = 65;
 const BOARD_SIZE = 8;

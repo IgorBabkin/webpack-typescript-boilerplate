@@ -1,7 +1,8 @@
 import {IConnection} from './IConnection';
 import {Subject} from 'rxjs';
 import {AnyAction} from '@reduxjs/toolkit';
-import {connected, GameMove, newMoves} from '../epics/connection/connectionActions';
+import {connected, newMoves} from '../epics/epicActions';
+import {GameMove} from '../domain/domain';
 
 export class TestConnection implements IConnection {
     action$ = new Subject<AnyAction>();
@@ -34,6 +35,10 @@ export class TestConnection implements IConnection {
 
     sendMove(payload: GameMove): void {
         console.log('SEND MOVE', JSON.stringify(payload));
+    }
+
+    sendReset(): void {
+        console.log('SEND RESET');
     }
 
 }

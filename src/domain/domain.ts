@@ -5,3 +5,10 @@ export type FigureItem = {
     type: FigureType;
     position: string;
 }
+
+export type GameMove = {
+    from: string;
+    to: string;
+    color: FigureColor;
+    createdAt: number;
+}

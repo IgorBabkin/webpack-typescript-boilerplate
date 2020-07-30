@@ -1,4 +1,4 @@
-import {FigureColor, FigureType} from '../domain';
+import {FigureColor, FigureType} from '../../domain/domain';
 
 export const CHESS_ICONS = {
     'white': {

@@ -1,6 +1,6 @@
 import {Observable} from 'rxjs';
 import {AnyAction} from '@reduxjs/toolkit';
-import {GameMove} from '../epics/connection/connectionActions';
+import {GameMove} from '../domain/domain';
 
 export interface IConnection {
     action$: Observable<AnyAction>;
@@ -10,4 +10,6 @@ export interface IConnection {
     close(): void;
 
     sendMove(payload: GameMove): void;
+
+    sendReset(): void;
 }
