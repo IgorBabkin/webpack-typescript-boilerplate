@@ -1,3 +1,5 @@
+import {FigureColor, FigureType} from '../domain';
+
 export const CHESS_ICONS = {
     'white': {
         'king': '&#x2654;',
@@ -15,4 +17,13 @@ export const CHESS_ICONS = {
         'knight': '&#x265E;',
         'pawn': '&#x265F;',
     },
+}
+
+export function getChessIcon(type: FigureType, color: FigureColor): string {
+    const icon = CHESS_ICONS[color][type];
+    if (!icon) {
+        throw new Error(`Wrong arguments: ${type} ${color}`);
+    }
+
+    return icon;
 }

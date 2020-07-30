@@ -20,13 +20,13 @@ export class TestConnection implements IConnection {
                     from: 'A2',
                     to: 'A3',
                     color: 'white',
-                    time: Date.now(),
+                    createdAt: Date.now(),
                 },
                 {
                     from: 'B2',
                     to: 'B3',
                     color: 'white',
-                    time: Date.now(),
+                    createdAt: Date.now(),
                 }
             ]))
         }, 3000);

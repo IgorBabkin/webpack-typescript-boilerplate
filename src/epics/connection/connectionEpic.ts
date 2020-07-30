@@ -19,8 +19,8 @@ export const movesEpic: AppEpic = (action$, state$, deps) => {
     return action$.pipe(
         filter(newMoves.match),
         concatMap(({payload}: PayloadAction<GameMove[]>) => {
-            return from(payload.filter(({time}) => {
-                return state$.value.figures.lastMoveTime < time;
+            return from(payload.filter(({createdAt}) => {
+                return state$.value.figures.lastMoveTime < createdAt;
             }).map((item) => makeMove(item)));
         })
     )

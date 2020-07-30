@@ -9,7 +9,7 @@ module.exports = {
     mode: 'development',
     context: path.resolve(__dirname, './src'),
     entry: {
-        app: './app',
+        app: './main',
     },
     output: {
         filename: '[name].[hash].js',

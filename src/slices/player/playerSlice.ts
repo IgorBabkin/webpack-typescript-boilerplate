@@ -1,5 +1,8 @@
 import {createSlice, SliceCaseReducers} from '@reduxjs/toolkit';
 import {PlayerState} from '../../components/store';
+import {shallowEqual, useSelector} from 'react-redux';
+import {RootState} from '../rootReducer';
+import {FigureColor} from '../../components/domain';
 
 export const playerSlice = createSlice<PlayerState, SliceCaseReducers<PlayerState>>({
     name: 'player',
@@ -15,3 +18,6 @@ export const playerSlice = createSlice<PlayerState, SliceCaseReducers<PlayerStat
 });
 
 export const {updatePlayer} = playerSlice.actions;
+export const usePlayerColorSelector = () => {
+    return useSelector<RootState, FigureColor>(s => s.player.color, shallowEqual);
+}

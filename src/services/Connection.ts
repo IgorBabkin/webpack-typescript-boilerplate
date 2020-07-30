@@ -26,5 +26,6 @@ export class Connection implements IConnection {
     }
 
     sendMove(payload: GameMove): void {
+        this.connection.emit('makeMove', payload);
     }
 }

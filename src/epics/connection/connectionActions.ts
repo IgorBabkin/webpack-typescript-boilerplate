@@ -5,7 +5,7 @@ export type GameMove = {
     from: string;
     to: string;
     color: FigureColor;
-    time: number;
+    createdAt: number;
 }
 
 export const start = createAction('start');

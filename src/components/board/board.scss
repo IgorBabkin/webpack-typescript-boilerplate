@@ -12,21 +12,35 @@
     height: 100%;
     padding-top: 2rem;
     box-sizing: border-box;
-    top: 0;
-    left: 0;
     padding-bottom: 2rem;
     width: 2rem;
+    top: 0;
+
+    &--left {
+      left: 0;
+    }
+
+    &--right {
+      right: 0;
+    }
   }
 
   &__letters {
     height: 2rem;
     position: absolute;
     width: 100%;
-    top: 0;
-    left: 0;
     padding-left: 2rem;
     padding-right: 2rem;
     box-sizing: border-box;
+    left: 0;
+
+    &--top {
+      top: 0;
+    }
+
+    &--bottom {
+      bottom: 0;
+    }
   }
 
   &__grid {
@@ -38,9 +52,13 @@
 .board-numbers {
   display: flex;
   color: #ddd;
-  flex-direction: column-reverse;
   justify-content: space-around;
   align-items: center;
+  flex-direction: column;
+
+  &--reverted {
+    flex-direction: column-reverse;
+  }
 }
 
 .board-grid {
